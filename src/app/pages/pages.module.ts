@@ -3,8 +3,13 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProgressComponent } from './progress/progress.component';
 import { Graficas1Component } from './graficas1/graficas1.component';
 import { PagesComponent } from './pages.component';
+
+//Modulos
 import { SharedModule } from '../shared/shared.module';
+import { ComponentsModule } from '../components/components.module';
+
 import { PAGES_ROUTES } from './pages.routes';
+import { FormsModule } from '@angular/forms';
  
 @NgModule({
     declarations: [
@@ -16,11 +21,13 @@ import { PAGES_ROUTES } from './pages.routes';
     exports: [
         DashboardComponent,
         ProgressComponent,
-        Graficas1Component
+        Graficas1Component,
     ],
     imports: [
+        FormsModule,
         SharedModule,
-        PAGES_ROUTES
+        PAGES_ROUTES,
+        ComponentsModule
     ]
 })
 
