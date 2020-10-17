@@ -8,15 +8,17 @@ import { PagesComponent } from './pages.component';
 import { SharedModule } from '../shared/shared.module';
 import { ComponentsModule } from '../components/components.module';
 
-import { PAGES_ROUTES } from './pages.routes';
+import { PagesRoutingModule } from './pages.routes';
 import { FormsModule } from '@angular/forms';
+import { AccountSettingsComponent } from './account-settings/account-settings.component';
  
 @NgModule({
     declarations: [
         PagesComponent,
         DashboardComponent,
         ProgressComponent,
-        Graficas1Component
+        Graficas1Component,
+        AccountSettingsComponent
     ],
     exports: [
         DashboardComponent,
@@ -26,7 +28,7 @@ import { FormsModule } from '@angular/forms';
     imports: [
         FormsModule,
         SharedModule,
-        PAGES_ROUTES,
+        PagesRoutingModule,
         ComponentsModule
     ]
 })

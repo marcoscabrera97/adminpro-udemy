@@ -10,7 +10,7 @@ import { Component } from '@angular/core';
 export class Graficas1Component {
 
   public labels1:String[] = ['Pan', 'Refresco', 'Tacos']
-  public data1: MultiDataSet = [
+  public data1 = [
     [10, 20, 40]
   ];
 }
