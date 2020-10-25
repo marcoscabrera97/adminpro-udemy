@@ -1,26 +1,21 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { Graficas1Component } from './pages/graficas1/graficas1.component';
-import { PagesComponent } from './pages/pages.component';
 
 // Modulos
-import { PagesRoutingModule } from './pages/pages.routes';
-import { ProgressComponent } from './pages/progress/progress.component';
+import { PagesRoutingModule } from './pages/pages.routing';
+import { AuthRoutingModule } from './auth/auth.routing';
 
+import { NopagefoundComponent } from './nopagefound/nopagefound.component';
 
 
 const routes: Routes = [
-  { 
-    path: '', 
-    component: PagesComponent, 
-    children: [
-      { path: 'dashboard', component: DashboardComponent },
-      { path: 'progress', component: ProgressComponent },
-      { path: 'grafica1', component: Graficas1Component },
-      { path: '', redirectTo: '/dashboard', pathMatch: 'full' }
-    ]
-  }
+
+  // path: '/dashboard' PagesRouting
+  // path: '/auth' AuthRouting
+  // path: '/medicos' MedicosRouting
+  // path: '/compras' ComprasRouting
+  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
+  { path: '**', component: NopagefoundComponent },
 ];
 
 
@@ -28,7 +23,8 @@ const routes: Routes = [
 @NgModule({
   imports: [
     RouterModule.forRoot( routes ),
-    PagesRoutingModule
+    PagesRoutingModule,
+    AuthRoutingModule
   ],
   exports: [ RouterModule ]
 })
