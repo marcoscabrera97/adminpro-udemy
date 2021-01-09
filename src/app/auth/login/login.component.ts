@@ -37,7 +37,6 @@ export class LoginComponent implements OnInit {
       }else{
         localStorage.removeItem('email');
       }
-      console.log('fin');
       this.router.navigateByUrl('/');
     }, (err) => {
       // Si sucede un error
