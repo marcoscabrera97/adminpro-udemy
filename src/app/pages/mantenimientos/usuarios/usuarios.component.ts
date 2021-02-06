@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Usuario } from '../../../models/usuario.model';
-import { UsuarioService } from '../../../services/usuario.service';
-import { CargarUsuario } from '../../../interfaces/cargar-usuarios.interface';
-import { BusquedasService } from '../../../services/busquedas.service';
 import Swal from 'sweetalert2';
+import { ModalImagenService } from 'src/app/services/modal-imagen.service';
+import { BusquedasService } from '../../../services/busquedas.service';
+import { UsuarioService } from '../../../services/usuario.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-usuarios',
@@ -11,7 +12,7 @@ import Swal from 'sweetalert2';
   styles: [
   ]
 })
-export class UsuariosComponent implements OnInit {
+export class UsuariosComponent implements OnInit, OnDestroy {
 
   public totalUsuarios: number = 0;
   public usuarios: Usuario[] = [];
@@ -19,11 +20,22 @@ export class UsuariosComponent implements OnInit {
   public desde: number = 0;
   public cargando: boolean = true;
 
+  public imgSubs: Subscription;
+
   constructor(private usuarioService:UsuarioService,
-              private busquedasService: BusquedasService) { }
+              private busquedasService: BusquedasService,
+              private modalImagenService: ModalImagenService) { }
+
+  ngOnDestroy(): void {
+    this.imgSubs.unsubscribe();
+  }
 
   ngOnInit(): void {
     this.cargarUsuarios();
+    this.imgSubs = this.modalImagenService.nuevaImagen.subscribe(img => {
+      console.log(img);
+      this.cargarUsuarios()
+    });
   }
 
   cargarUsuarios(){
@@ -35,6 +47,7 @@ export class UsuariosComponent implements OnInit {
         this.usuarios = usuarios;
         this.usuariosTemp = usuarios;
         this.cargando = false;
+        console.log(this.usuarios);
       }
     })
   }
@@ -86,4 +99,14 @@ export class UsuariosComponent implements OnInit {
     })
   }
 
+  cambiarRole(usuario: Usuario){
+    this.usuarioService.guardarUsuario(usuario)
+      .subscribe(resp => {
+        console.log(resp);
+      })
+  }
+
+  abrirModal(usuario: Usuario){
+    this.modalImagenService.abrirModal('usuarios', usuario.uid, usuario.img);
+  }
 }
