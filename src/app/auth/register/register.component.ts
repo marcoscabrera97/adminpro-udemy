@@ -31,14 +31,12 @@ export class RegisterComponent {
 
   crearUsuario(){
     this.formSubmitted = true;
-    console.log(this.registerForm.value);
     if(this.registerForm.invalid){
       return;
     }
     this.usuarioService.crearUsuario(this.registerForm.value)
       .subscribe(resp => {
-        console.log('usuario creado correctamente')
-        console.log(resp);
+
         this.router.navigateByUrl('/');
       }, (err) => {
         // Si sucede un error

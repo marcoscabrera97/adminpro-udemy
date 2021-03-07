@@ -30,9 +30,8 @@ export class PerfilComponent implements OnInit {
   }
 
   actualizarPerfil(){
-    console.log(this.perfilForm);
+
     this.usuarioService.actualizarPerfil(this.perfilForm.value).subscribe((resp) => {
-        console.log(resp);
         const {nombre, email} = this.perfilForm.value;
         this.usuario.nombre = nombre;
         this.usuario.email = email;
